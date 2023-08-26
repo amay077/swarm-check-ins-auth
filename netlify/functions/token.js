@@ -9,33 +9,47 @@ const handler = async (event) => {
 
   try {
     const code = event.queryStringParameters.code ?? 'empty';
-    const clientId = process.env.GITHUB_OAUTH_CLIENT_ID;
-    const clientSecret = process.env.GITHUB_OAUTH_CLIENT_SECRET;
-    const accessTokenUrl = `https://github.com/login/oauth/access_token?client_id=${clientId}&client_secret=${clientSecret}&code=${code}`;
-    console.log(`handler ~ accessTokenUrl:`, accessTokenUrl);
+    const client_id = process.env.CLIENT_ID;
+    const client_secret = process.env.CLIENT_SECRET;
+    const redirect_uri = process.env.REDIRECT_URI;
+    const grant_type = 'authorization_code';
+
+    // パラメータ
+    const query = new URLSearchParams({
+      client_id,
+      client_secret,
+      grant_type,
+      redirect_uri,
+      code
+    });
+
+    const accessTokenUrl = `https://foursquare.com/oauth2/access_token?` + query;
+    console.log(`handler ~ accessTokenUrl:`, accessTokenUrl, query);
 
     const res = await fetch(accessTokenUrl, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Access-Control-Allow-Origin': "*",
         'Accept': 'application/json'
       },      
     });
-    const resJson = await res.json();
-    console.log(`handler ~ resText:`, resJson);
 
     if (!res.ok) {
       return {
         statusCode: res.status,
         headers,
-        body: JSON.stringify(resJson)
+        body: JSON.stringify(res)
       }
     };
+
+    const tokenResponse = await res.json();
+    console.log(`handler ~ resText:`, tokenResponse);
+    const accessToken = tokenResponse.data.access_token;
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(resJson)
+      body: JSON.stringify(accessToken)
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
