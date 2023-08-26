@@ -43,13 +43,13 @@ const handler = async (event) => {
     };
 
     const tokenResponse = await res.json();
-    console.log(`handler ~ resText:`, tokenResponse);
-    const accessToken = tokenResponse.data.access_token;
+    console.log(`handler ~ resText:`, tokenResponse); // { access_token: 'QWOxxxx' }
+    const accessToken = tokenResponse.access_token;
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(accessToken)
+      body: JSON.stringify({ accessToken })
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
