@@ -1,0 +1,23 @@
+{
+  "name": "hello-netlify-functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify env:import .env && netlify functions:serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://amay077@github.com/amay077/hello-netlify-functions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amay077/hello-netlify-functions/issues"
+  },
+  "homepage": "https://github.com/amay077/hello-netlify-functions#readme",
+  "dependencies": {
+    "netlify-cli": "^13.0.0",
+    "node-fetch": "^2.6.9"
+  }
+}
