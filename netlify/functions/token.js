@@ -43,7 +43,7 @@ const handler = async (event) => {
     };
 
     const tokenResponse = await res.json();
-    console.log(`handler:`, tokenResponse); // { access_token: 'QWOxxxx' }
+    console.log(`handler - `, tokenResponse); // { access_token: 'QWOxxxx' }
     const access_token = tokenResponse.access_token;
 
     return {
