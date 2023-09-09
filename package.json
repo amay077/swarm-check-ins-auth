@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "netlify env:import .env && netlify functions:serve"
+    "dev": "netlify env:import .env && netlify functions:serve"
   },
   "repository": {
     "type": "git",
