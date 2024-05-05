@@ -14,6 +14,7 @@ const headers = {
 };
 
 const handler = async (event) => {
+  console.log(`FIXME h_oku 後で消す  -> handler -> event:`, event);
 
   try {
     const code = event.queryStringParameters.code ?? 'empty';
@@ -38,6 +39,7 @@ const handler = async (event) => {
     
 
     if (!res.ok) {
+      console.log(`FIXME h_oku 後で消す  -> handler -> res.status:`, res.status);
       return {
         statusCode: res.status,
         headers: resHeaders,
@@ -54,6 +56,7 @@ const handler = async (event) => {
       body: JSON.stringify(tokenResponse)
     }
   } catch (error) {
+    console.log(`FIXME h_oku 後で消す  -> handler -> error:`, error);
     return { statusCode: 500, body: error.toString() }
   }
 }
